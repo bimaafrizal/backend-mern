@@ -111,7 +111,6 @@ const login: RequestHandler = async (
 
     //encrypt password
     const encryptedPassword = encrypt(password);
-    console.log(encryptedPassword);
     const result = await UserModel.findOne({
       $or: [
         { email: identifier },
