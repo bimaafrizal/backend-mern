@@ -10,5 +10,6 @@ router.get("/", (req, res) => {
 
 router.get('/dumy', dumyController.dumy);
 router.post("/register", authController.register);
+router.post("/login", authController.login);
 
 export default router;
