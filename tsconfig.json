@@ -113,5 +113,7 @@
   "ts-node": {
     "transpileOnly": true,
     "esm": true
-  }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx", "api/.*ts"],
+
 }
