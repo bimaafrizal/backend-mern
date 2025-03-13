@@ -1,9 +1,9 @@
 import { Request, Response, RequestHandler } from "express";
 import * as Yup from "yup";
-import UserModel from "../models/user.model.ts";
-import { encrypt } from "../utils/encryption.ts";
-import { generateToken } from "../utils/jwt.ts";
-import { IRequest } from "../middlewares/auth.middleware.ts";
+import UserModel from "../models/user.model";
+import { encrypt } from "../utils/encryption";
+import { generateToken } from "../utils/jwt";
+import { IRequest } from "../middlewares/auth.middleware";
 
 type TRegister = {
   fullName: string;

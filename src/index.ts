@@ -1,7 +1,7 @@
 import express from "express";
-import router from './routes/api.ts';
+import router from './routes/api';
 import bodyParser from "body-parser";
-import db from "./utils/database.ts";
+import db from "./utils/database";
 
 async function connectToDatabase() {
   try {

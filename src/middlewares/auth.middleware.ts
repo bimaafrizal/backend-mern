@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { getUserData, IUserToken } from "../utils/jwt.ts";
+import { getUserData, IUserToken } from "../utils/jwt";
 
 export interface IRequest extends Request {
   user?: IUserToken;

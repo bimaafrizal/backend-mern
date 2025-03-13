@@ -1,7 +1,7 @@
 import express from "express";
-import dumyController from '../controllers/dummy.controller.ts';
-import authController from "../controllers/auth.controller.ts";
-import authMiddleware from "../middlewares/auth.middleware.ts";
+import dumyController from '../controllers/dummy.controller';
+import authController from "../controllers/auth.controller";
+import authMiddleware from "../middlewares/auth.middleware";
 
 const router = express.Router();
 

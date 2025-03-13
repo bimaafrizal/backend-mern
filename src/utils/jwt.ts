@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
-import { User } from "../models/user.model.ts";
+import { User } from "../models/user.model";
 import jwt from "jsonwebtoken";
-import { SECRET } from "./env.ts";
+import { SECRET } from "./env";
 
 export interface IUserToken extends Omit<User, "password" | "activationCode" | "isActive" | "email" | "fullName" | "profilePicture" | "username"> {
     id? : Types.ObjectId;
