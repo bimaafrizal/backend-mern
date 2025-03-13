@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema<User>({
     },
     isActive: {
         type: Schema.Types.Boolean,
-        default: false,
+        default: true,
     },
     activationCode: {
         type: Schema.Types.String,

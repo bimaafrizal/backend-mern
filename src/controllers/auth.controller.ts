@@ -2,6 +2,8 @@ import { Request, Response, RequestHandler } from "express";
 import * as Yup from "yup";
 import UserModel from "../models/user.model.ts";
 import { encrypt } from "../utils/encryption.ts";
+import { generateToken } from "../utils/jwt.ts";
+import { IRequest } from "../middlewares/auth.middleware.ts";
 
 type TRegister = {
   fullName: string;
@@ -129,10 +131,24 @@ const login: RequestHandler = async (
       return;
     }
 
+    // Check if user is active
+    // if (!result.isActive) {
+    //   res.status(403).json({
+    //     message: "User is not active",
+    //     data: null,
+    //   });
+    //   return;
+    // }
+
+    const token = generateToken({
+      id: result._id,
+      role: result.role,
+    })
+
     // Send success response
     res.status(200).json({
       message: "Success login",
-      data: result,
+      data: token,
     });
   } catch (error) {
     // Handle validation error
@@ -151,6 +167,37 @@ const login: RequestHandler = async (
   }
 }
 
+const me: RequestHandler = async (
+  req: IRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const user = req.user;
+    if (!user) {
+      res.status(401).json({
+        message: "Unauthorized",
+      });
+      return;
+    }
+    const result = await UserModel.findById(user?.id);
+    if (!result) {
+      res.status(404).json({
+        message: "User not found",
+      });
+      return;
+    }
+    // Send success response
+    res.status(200).json({
+      message: "Success get user",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
 
 
-export default { register, login };
+
+export default { register, login, me };
