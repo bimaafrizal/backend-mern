@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { DATABASE_URL, DB_NAME } from "./env";
+import { DATABASE_URL, DB_NAME } from "./env.ts";
 
 const connect = async () => {
   try {

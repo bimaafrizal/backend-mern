@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { encrypt } from "../utils/encryption";
+import { encrypt } from "../utils/encryption.ts";
 
 
 export interface User {
