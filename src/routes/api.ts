@@ -5,9 +5,6 @@ import authMiddleware from "../middlewares/auth.middleware.ts";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello, world!");
-});
 router.get('/dumy', dumyController.dumy);
 
 //auth
