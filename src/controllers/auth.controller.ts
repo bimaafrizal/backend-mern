@@ -99,6 +99,14 @@ const login: RequestHandler = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  /**
+   #swagger.requestBody = {
+    required: true,
+    schema: {
+      $ref: "#/components/schemas/LoginRequest",
+    }
+   }
+   */
   const { identifier, password } = req.body as TLogin;
 
   // Validate the request body against the schema
@@ -114,14 +122,9 @@ const login: RequestHandler = async (
     //encrypt password
     const encryptedPassword = encrypt(password);
     const result = await UserModel.findOne({
-      $or: [
-        { email: identifier },
-        { username
-          : identifier },
-      ],
+      $or: [{ email: identifier }, { username: identifier }],
       $and: [{ password: encryptedPassword }],
     });
-
 
     if (!result) {
       res.status(403).json({
@@ -143,7 +146,7 @@ const login: RequestHandler = async (
     const token = generateToken({
       id: result._id,
       role: result.role,
-    })
+    });
 
     // Send success response
     res.status(200).json({
@@ -171,6 +174,11 @@ const me: RequestHandler = async (
   req: IRequest,
   res: Response
 ): Promise<void> => {
+  /**
+   #swagger.security = [{
+   "bearerAuth": []
+   }] 
+   */
   try {
     const user = req.user;
     if (!user) {
