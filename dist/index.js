@@ -7,6 +7,8 @@ const express_1 = __importDefault(require("express"));
 const api_1 = __importDefault(require("./routes/api"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const database_1 = __importDefault(require("./utils/database"));
+const route_1 = __importDefault(require("./docs/route"));
+const cors_1 = __importDefault(require("cors"));
 async function connectToDatabase() {
     try {
         const connection = await (0, database_1.default)();
@@ -17,12 +19,14 @@ async function connectToDatabase() {
     }
 }
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
 const port = 3000;
 api_1.default.get("/", (req, res) => {
     res.send("Hello, world!");
 });
-app.use('/api', api_1.default);
+app.use('/', api_1.default);
+(0, route_1.default)(app);
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);
 });

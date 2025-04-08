@@ -105,6 +105,14 @@ const loginValidfationSchema = Yup.object().shape({
         .min(6, "Password must be at least 6 characters"),
 });
 const login = async (req, res) => {
+    /**
+     #swagger.requestBody = {
+      required: true,
+      schema: {
+        $ref: "#/components/schemas/LoginRequest",
+      }
+     }
+     */
     const { identifier, password } = req.body;
     // Validate the request body against the schema
     try {
@@ -115,10 +123,7 @@ const login = async (req, res) => {
         //encrypt password
         const encryptedPassword = (0, encryption_1.encrypt)(password);
         const result = await user_model_1.default.findOne({
-            $or: [
-                { email: identifier },
-                { username: identifier },
-            ],
+            $or: [{ email: identifier }, { username: identifier }],
             $and: [{ password: encryptedPassword }],
         });
         if (!result) {
@@ -164,6 +169,11 @@ const login = async (req, res) => {
     }
 };
 const me = async (req, res) => {
+    /**
+     #swagger.security = [{
+     "bearerAuth": []
+     }]
+     */
     try {
         const user = req.user;
         if (!user) {
