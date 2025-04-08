@@ -11,7 +11,7 @@ const path_1 = __importDefault(require("path"));
 function docs(app) {
     const css = fs_1.default.readFileSync(path_1.default.resolve(__dirname, "../../node_modules/swagger-ui-dist/swagger-ui.css"), "utf-8");
     app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_output_json_1.default, {
-        customCss: css,
+        // customCss: css,
         customCssUrl: "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css",
     }));
 }
